@@ -1,6 +1,6 @@
 import type { FC, PropsWithChildren } from "react";
 import { IntlProvider } from "react-intl";
-import { Intl } from "../../constants";
+import { Intl } from "@constants";
 
 import fa from "../../i18n/fa.json";
 

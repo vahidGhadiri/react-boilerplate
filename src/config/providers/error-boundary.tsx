@@ -1,6 +1,7 @@
 import type { PropsWithChildren, ReactNode } from "react";
 import React from "react";
-import { GENERAL_CONSTANTS } from "../../constants";
+
+import { GENERAL_CONSTANTS } from "@constants";
 
 interface ErrorBoundaryProps {
   children: ReactNode;
