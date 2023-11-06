@@ -1,11 +1,11 @@
 import ReactDOM from "react-dom/client";
-import React from "react";
+import { QueryProvider } from "./config";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <React.StrictMode>
+  <QueryProvider>
     <div>Render inital commit</div>
-  </React.StrictMode>
+  </QueryProvider>
 );
