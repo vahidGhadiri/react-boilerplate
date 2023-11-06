@@ -4,7 +4,8 @@
     "paths": {
       "@src": ["./src"],
       "@constants": ["./src/constants"],
-      "@config": ["./src/config"]
+      "@config": ["./src/config"],
+      "@router": ["./src/router"]
     }
   },
   "exclude": ["node_modules"]

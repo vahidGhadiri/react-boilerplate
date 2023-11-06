@@ -1,8 +1,11 @@
 import ReactDOM from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
+
+import { App } from "@router";
 import {
   ErrorBoundaryProvider,
-  QueryProvider,
   LanguageProvider,
+  QueryProvider,
 } from "@config";
 
 const root = ReactDOM.createRoot(
@@ -12,7 +15,9 @@ root.render(
   <ErrorBoundaryProvider>
     <LanguageProvider>
       <QueryProvider>
-        <div>Render inital commit</div>
+        <Router>
+          <App />
+        </Router>
       </QueryProvider>
     </LanguageProvider>
   </ErrorBoundaryProvider>
