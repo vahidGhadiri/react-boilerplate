@@ -5,6 +5,8 @@
       "@src": ["./src"],
       "@constants": ["./src/constants"],
       "@config": ["./src/config"],
+      "@core": ["./src/core"],
+      "@core/user": ["./src/core/user"],
       "@router": ["./src/router"]
     }
   },
