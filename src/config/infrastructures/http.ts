@@ -3,24 +3,19 @@ import { GENERAL_CONSTANTS } from "@constants";
 interface RequestParams {
   method: "POST" | "GET" | "DELETE" | "PUT";
   endpointUrl?: string;
-  body?: RequestInit | undefined;
+  body?: unknown;
 }
 
-interface GeneralDomainService {
-  domainUrl: string;
-}
-
-export type Error = {
+export type ErrorResponse = {
   httpStatusCode: string;
   status?: number;
   message: string;
 };
 
-abstract class Http<DomainService extends GeneralDomainService> {
-  private domainService: DomainService;
+export class Http {
   private url: string;
 
-  private errorGenerator(errorObject: Error): Error {
+  private errorGenerator(errorObject: ErrorResponse): ErrorResponse {
     const emptyErrorMessage = GENERAL_CONSTANTS.SERVICE_ERROR_MESSAGE;
     if (!errorObject?.message?.trim()) {
       errorObject.message = emptyErrorMessage;
@@ -32,7 +27,7 @@ abstract class Http<DomainService extends GeneralDomainService> {
     endpointUrl,
     method,
     body,
-  }: RequestParams): Promise<ResponseInit | undefined> {
+  }: RequestParams): Promise<any> {
     try {
       const options = {
         timeout: 300_000,
@@ -41,16 +36,16 @@ abstract class Http<DomainService extends GeneralDomainService> {
         },
       };
       const controller = new AbortController();
-      this.url = `${process.env.REACT_APP_BASE_URL}${this.domainService["domainUrl"]}${endpointUrl}`;
       const requestId = setTimeout(() => controller.abort(), options.timeout);
+      this.url = `${process.env.REACT_APP_BASE_URL}/${endpointUrl}`;
 
-      return fetch(this.url, {
+      return await fetch(this.url, {
         body: JSON.stringify(body),
         method,
         ...options,
       }).then((res) => {
         if (res.ok) {
-          return res;
+          return res.json();
         } else {
           this.errorGenerator({
             message: JSON.stringify(res),

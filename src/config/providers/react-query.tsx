@@ -1,16 +1,25 @@
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import type { FC, PropsWithChildren } from "react";
+import { QueryClient, QueryClientProvider } from "react-query";
+import type { FC, PropsWithChildren, ReactNode } from "react";
+
+declare module "react-query/types/react/QueryClientProvider" {
+  interface QueryClientProviderProps {
+    children?: ReactNode;
+  }
+}
 
 const client = new QueryClient({
   defaultOptions: {
     queries: {
       retry: 0,
-      retryOnMount: false,
     },
   },
 });
 
-const QueryProvider: FC<PropsWithChildren> = ({ children }) => (
+type QueryClientProvider = {
+  children: ReactNode;
+};
+
+const QueryProvider: FC<QueryClientProvider> = ({ children }) => (
   <QueryClientProvider client={client}>{children}</QueryClientProvider>
 );
 
