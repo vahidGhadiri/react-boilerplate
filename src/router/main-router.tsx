@@ -4,7 +4,6 @@ import type { FC } from "react";
 import { ErrorBoundaryProvider } from "@config";
 
 import PrivateRoute from "./private-route";
-import { useGetUser } from "@core/user";
 
 //These are just sample components to handle routing
 const Login: FC = () => <div>LOGIN PAGE</div>;
